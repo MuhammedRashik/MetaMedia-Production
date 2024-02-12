@@ -2,7 +2,6 @@ import {AUTH_URL,POST_URL,STORY_URL,USER_URL} from '../baseUrl/axios.baseUrl'
 
 
 // AUTH SERVICE
-
 export const Login_Api = `${AUTH_URL}/login`
 export const Logout_APi = `${AUTH_URL}/logout`
 export const SignUp_Api = `${AUTH_URL}/signup`
@@ -18,7 +17,6 @@ export const RefreshToken_Api=`${AUTH_URL}/refresh`
 
 export const AddProfile_Api=`${USER_URL}/addProfile`
 export const EditProfile_Api=`${USER_URL}/editProfile`
-
 
 // STORY SERVICE
 
