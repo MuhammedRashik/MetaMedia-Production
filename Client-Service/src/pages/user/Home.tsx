@@ -12,6 +12,7 @@ import Settings from "./Settings";
 import { Route, Routes } from "react-router-dom";
 import AsideComponent from "../../components/HomeComponent/AsideComponent";
 import SelectPostModal from "../../components/HomeComponent/SelectPostModal";
+import MainModalBorderPost from "../../components/HomeComponent/Modal/mainModalBorderPost";
 
 
 
@@ -20,26 +21,20 @@ export interface SetSidebarOpenFunction {
 }
 const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-  const [isModalOpen,setIsModalOpen]= useState<boolean>(true)
+  const [isAddPost,setIsAddPost] = useState(false)
  
   return (
     <>
    
 
 
-        <AsideComponent sidebarOpen={sidebarOpen}/>
-        {console.log('helooo')
-        }
-        {/* {isModalOpen && (
-            <>
-            <div className="flex justify-center w-full h-full bg-transparent  ">
-
-           <div className="fixed   z-10  w-2/3 h-2/3 sm:left-80  flex justify-center sm:border text-white rounded-lg sm:border-black sm:h-[650px]">
-            
-            </div>
-           </div>
-            </> 
-        )} */}
+        <AsideComponent sidebarOpen={sidebarOpen} setIsAddPost={setIsAddPost} isAddPost={isAddPost}   />
+       {isAddPost && (
+        <>
+        <MainModalBorderPost setIsAddPost={setIsAddPost} />
+        </>
+       )}
+       
     <Routes>
       {/* <Route path="/" element={<AsideComponent setSelectedMenu={setSelectedMenu} selectedMenu={selectedMenu} sidebaropen={sidebaropen}/>} > */}
           <Route path="/" element={<MainBody setSidebarOpen={setSidebarOpen}/>} />
@@ -52,7 +47,7 @@ const Home = () => {
           
       {/* </Route> */}
     </Routes>
-   
+    
 
 
 

@@ -96,7 +96,7 @@ const SizeSelectModal = () => {
                               containerStyle: {
                                 position: "relative",
                                 width: "100%",
-                                height: "100%",
+                                height: "95%",
                                 overflow: "hidden",
                                 backgroundColor: "white",
                               },

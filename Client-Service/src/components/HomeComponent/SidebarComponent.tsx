@@ -27,7 +27,7 @@ import { Link, useLocation } from "react-router-dom";
 
 
 
-const Sidebar = ({ open}:any) => {
+const Sidebar = ({ open,setIsAddPost,isAddPost}:any) => {
   const location = useLocation();
   // const activePath = "/path/to/target";
   console.log(location.pathname, "PATHNAME");
@@ -68,6 +68,7 @@ const Sidebar = ({ open}:any) => {
 
   const handlePostClick=(e:any)=>{
     e.preventDefault()
+    setIsAddPost(!isAddPost)
     
 
   }
