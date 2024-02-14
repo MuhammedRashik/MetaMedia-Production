@@ -25,8 +25,9 @@ const CropImageBody = ({ setPostState }: any) => {
   const [imglength, setImageLength] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [croppedImages, setCroppedImages]: any = useState([]); // Store cropped images here
-  const [croppedImage, setCroppedImage] = useState(null);
+  const [croppedImage, setCroppedImage] = useState('');
   const [isfinish,setIsfinish]=useState(false)
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,18 +53,33 @@ const CropImageBody = ({ setPostState }: any) => {
     setAspect(size);
   };
 
+
+
+
+
+
   //crop the image
   const handleCropComplete = async (
     croppedArea: { x: number; y: number; width: number; height: number },
     croppedAreaPixels: { x: number; y: number; width: number; height: number }
   ) => {
-    const img = await getCroppedImage(
-      selectedImageSrc,
-      croppedArea,
-      croppedAreaPixels
-    );
-    await setCroppedImage(img);
-    console.log("saved");
+    try {
+        console.log("HHHH",croppedAreaPixels,"LLLL",croppedArea);
+        
+        const croppedImag = await getCroppedImage(
+            selectedImageSrc,
+            croppedArea,
+            croppedAreaPixels
+          );
+
+
+
+         await setCroppedImage(croppedImag);
+        console.log("saved",croppedImage);
+    } catch (error:any) {
+        toast.error(error)
+    }
+   
   };
 
   const getCroppedImage = (
@@ -72,28 +88,37 @@ const CropImageBody = ({ setPostState }: any) => {
     croppedAreaPixels: any
   ): any => {
     return new Promise((resolve, reject) => {
+      const canvas = document.createElement("canvas");
       const image = new Image();
       image.src = imageSrc;
       image.onload = () => {
-        const canvas = document.createElement("canvas");
+        const ctx:any = canvas.getContext("2d");
+        
+        // Set canvas size based on cropped area dimensions
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
         canvas.width = croppedAreaPixels.width;
         canvas.height = croppedAreaPixels.height;
-        const ctx = canvas.getContext("2d");
+       
+        
+        // Draw the cropped image onto the canvas
         ctx?.drawImage(
           image,
-          croppedArea.x * scaleX,
-          croppedArea.y * scaleY,
-          croppedArea.width * scaleX,
-          croppedArea.height * scaleY,
+          croppedAreaPixels.x * scaleX,
+          croppedAreaPixels.y * scaleY,
+          croppedAreaPixels.width * scaleX,
+          croppedAreaPixels.height * scaleY,
           0,
           0,
           croppedAreaPixels.width,
           croppedAreaPixels.height
         );
-        const croppedImage = canvas.toDataURL("image/jpeg"); // Change 'image/jpeg' to 'image/png' if needed
-        resolve(croppedImage);
+  
+        // Convert the cropped image to base64 format
+        const croppedImageBase64:any = canvas.toDataURL("image/jpeg"); // Change 'image/jpeg' to 'image/png' if needed
+        toast.success('here')
+        resolve(croppedImageBase64);
+    
       };
       image.onerror = (error) => reject(error);
     });
@@ -109,7 +134,6 @@ const CropImageBody = ({ setPostState }: any) => {
     setPostState(1);
   };
 
-  const saveCroppedImage = () => {};
   useEffect(() => {
     console.log("Cropped Images:", croppedImages);
   }, [croppedImages]);
@@ -125,7 +149,7 @@ const CropImageBody = ({ setPostState }: any) => {
   const switchToNextImage = async () => {
     if (selectedImageIndex < imglength - 1) {
       await setCroppedImages([...croppedImages, croppedImage]);
-      setCroppedImage(null);
+      setCroppedImage('');
       setSelectedImageIndex(selectedImageIndex + 1);
       setSelectedImageSrc(post.images[selectedImageIndex + 1]); // Update selected image source
       setCrop({ x: 0, y: 0 }); // Reset crop for the new image
@@ -275,3 +299,11 @@ const CropImageBody = ({ setPostState }: any) => {
 };
 
 export default CropImageBody;
+
+
+
+
+
+
+
+

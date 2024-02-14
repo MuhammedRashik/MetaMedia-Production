@@ -16,6 +16,7 @@ import Settings from "../pages/user/Settings";
 import AddPostModal from "../components/HomeComponent/AddPostcomponent";
 import SizeSelectModal from "../components/HomeComponent/SizeSelectModal";
 import SelectPostModal from "../components/HomeComponent/SelectPostModal";
+// import TestCrop from "../components/HomeComponent/Modal/testCrop";
 
 
 
@@ -39,7 +40,9 @@ const UserRouter = () => {
       {/* <Route path="/post" element={<AddPostModal/>} /> */}
       <Route path="/size" element={<SizeSelectModal/>} />
       <Route path="/selectPost" element={<SelectPostModal/>} />
+      {/* <Route path="/croping" element={<TestCrop/>} /> */}
 
+  
      
 
       {/* <Route path="/logout"/> */}

@@ -1,12 +1,37 @@
 import { ArrowLeft, MapPin, Users } from "lucide-react";
-import { useState } from "react";
-const AddPostDetailsBody = () => {
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearImages } from "../../../utils/ReduxStore/Slice/postSlice";
+import { toast } from "sonner";
+
+
+
+const AddPostDetailsBody = ({setPostState}:any) => {
+
+
+  const post = useSelector((state: any) => state.persisted.post);
+  console.log('LLL',post);
+  const dispatch=useDispatch()
   const [aspect, setAspect]: any = useState([1 / 1]);
   const [isOpen, setIsOpen] = useState(false);
   const [isTagOpen, setIsTagOpen] = useState(false);
-
+  const [selectedImageSrc, setSelectedImageSrc] = useState(post.images[0][0]);
   const [text, setText] = useState("");
+  const [imglength, setImageLength] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [hideLike,setHideLike]=useState(false)
+  const [hideComment,setHideComment]=useState(false)
+
   const maxLength = 500;
+
+  useEffect(() => {
+    setImageLength(post.images.length);
+    setSelectedImageIndex(0);
+    console.log(selectedImageSrc,'PPPPP');
+    
+    setSelectedImageSrc(post.images[0][0]);
+  }, [post]);
+
 
   const handleChange = (event: any) => {
     const inputValue = event.target.value;
@@ -21,9 +46,32 @@ const AddPostDetailsBody = () => {
   const tagToggleDropdown = () => {
     setIsTagOpen(!isTagOpen);
   };
+  const handleBack = () => {
+    dispatch(clearImages());
+    setPostState(1);
+  };
+
+
+  const hancleHideLike =()=>{
+    setHideLike(!hideLike)
+    
+    
+  }
+  const handleCommenthide =()=>{
+    setHideComment(!hideComment)
+  }
+
+
+
+  const AddPost =()=>{
+    
+  }
+
+
 
   return (
     <>
+
     <div className="fixed top-32 md:h-5/6 w-full md:top-16 z-10 sm:ml-4  sm:w-4/6   flex justify-center border text-white rounded-lg border-gray-500  bg-white" >
 
 
@@ -31,7 +79,7 @@ const AddPostDetailsBody = () => {
         <div className="w-full p-5 flex justify-center sm:border-b sm:border-b-gray-200">
           <div className="flex justify-between w-full">
             <p className="text-black">
-              <ArrowLeft />
+              <ArrowLeft onClick={handleBack} />
             </p>
             <p className="font-sans font-bold sm:font-semibold text-[#042F2C] text-md sm:text-lg">
               Create new post
@@ -46,8 +94,9 @@ const AddPostDetailsBody = () => {
               <div className="w-full h-full">
                 <img
                   className="w-full h-full object-cover"
-                  src="https://i.pinimg.com/564x/86/a5/55/86a555402878df2d667eb1d5800a31b1.jpg"
+                  src={selectedImageSrc}
                   alt=""
+                  style={{width:"100%",height:"100%"}}
                 />
               </div>
             </div>
@@ -211,8 +260,8 @@ const AddPostDetailsBody = () => {
                         >
                           <li>
                             <>
-                              <div className="flex p-2 rounded  ">
-                                <label className="relative inline-flex items-center w-full cursor-pointer">
+                              <div className="flex p-2 rounded  " >
+                                <label className="relative inline-flex items-center w-full cursor-pointer"onClick={hancleHideLike}>
                                   <input
                                     type="checkbox"
                                     defaultValue=""
@@ -226,7 +275,7 @@ const AddPostDetailsBody = () => {
                               </div>
                               <li>
                                 <div className="flex p-2 rounded ">
-                                  <label className="relative inline-flex items-center w-full cursor-pointer">
+                                  <label className="relative inline-flex items-center w-full cursor-pointer" onClick={handleCommenthide}>
                                     <input
                                       type="checkbox"
                                       defaultValue=""

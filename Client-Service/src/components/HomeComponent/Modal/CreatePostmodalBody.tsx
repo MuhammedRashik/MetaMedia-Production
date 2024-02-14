@@ -7,7 +7,14 @@ const CreatePostModalBody = ({setIsAddPost,setPostState}:any) => {
 
     const [CamaraOn, setCamaraOn] = useState(false);
     const [imgSrc, setImgSrc] = useState(null);
+   
+
     const dispatch=useDispatch()
+
+
+
+
+
     const openGallery = () => {
       const fileInput = document.getElementById("fileInput");
       if (fileInput) {

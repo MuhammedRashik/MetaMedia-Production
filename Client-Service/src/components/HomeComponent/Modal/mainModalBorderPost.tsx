@@ -17,7 +17,7 @@ const MainModalBorderPost=({setIsAddPost}:any)=>{
 
          {postState === 1 && <CreatePostModalBody setIsAddPost={setIsAddPost} setPostState={setPostState} />}
         {postState === 2 && <CropImageBody setPostState={setPostState} />}
-        {postState === 3 && <AddPostDetailsBody />}
+        {postState === 3 && <AddPostDetailsBody setPostState={setPostState} />}
 
 
 
