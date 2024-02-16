@@ -22,3 +22,9 @@ export const EditProfile_Api=`${USER_URL}/editProfile`
 
 export const AddHighlight_Api=`${STORY_URL}/addHighlight`
 
+
+
+
+// POST SERVICE
+
+export const AddPost_Api=`/api/post/addPost`

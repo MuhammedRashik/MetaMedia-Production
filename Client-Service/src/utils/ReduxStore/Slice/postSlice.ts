@@ -35,9 +35,13 @@ const postSlice = createSlice({
         },
         setAspectRatio: (state, action) => {
             state.aspectRatio = action.payload;
+        },
+        clearAspectRatio:(state:any)=>{
+            state.aspectRatio=null
         }
+
     }
 });
 
-export const { addImage, removeImage, clearImages, addVideo, removeVideo, clearVideos, setAspectRatio } = postSlice.actions;
+export const { addImage, removeImage, clearImages, addVideo, removeVideo, clearVideos, setAspectRatio ,clearAspectRatio} = postSlice.actions;
 export default postSlice.reducer;

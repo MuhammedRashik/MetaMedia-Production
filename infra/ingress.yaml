@@ -26,11 +26,17 @@ spec:
                   number: 3001
           - path: /?(.*)
             pathType: Prefix
-
             backend:
               service:
                 name: client-srv
                 port:
                   number: 5173
+          - path: /api/post/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: post-srv
+                port:
+                  number: 3002        
   ingressClassName: nginx
 

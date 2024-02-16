@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import {
   clearImages,
   addImage,
+  setAspectRatio,
+  clearAspectRatio
 } from "../../../utils/ReduxStore/Slice/postSlice";
 import { AdvancedImage } from "@cloudinary/react";
 
@@ -50,6 +52,8 @@ const CropImageBody = ({ setPostState }: any) => {
   };
   //change the aspect ratio
   const changeSize = (size: any) => {
+    dispatch(clearAspectRatio())
+    dispatch(setAspectRatio(aspect))
     setAspect(size);
   };
 
@@ -116,7 +120,7 @@ const CropImageBody = ({ setPostState }: any) => {
   
         // Convert the cropped image to base64 format
         const croppedImageBase64:any = canvas.toDataURL("image/jpeg"); // Change 'image/jpeg' to 'image/png' if needed
-        toast.success('here')
+       
         resolve(croppedImageBase64);
     
       };
@@ -142,6 +146,8 @@ const CropImageBody = ({ setPostState }: any) => {
     if(isfinish){
         dispatch(clearImages())
         dispatch(addImage(croppedImages))
+        dispatch(clearAspectRatio())
+        dispatch(setAspectRatio(aspect))
         setPostState(3)
     }
   },[croppedImages,isfinish])
@@ -176,7 +182,7 @@ const CropImageBody = ({ setPostState }: any) => {
 
     await setIsfinish(true)
 
-    toast.success('hii')
+   
   console.log('HELLO---',croppedImages);
  
   };

@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-const BASE_URL='http://metamedia.com'
+export const BASE_URL='http://metamedia.com'
 
 export const USER_URL = '/api/user'; 
 

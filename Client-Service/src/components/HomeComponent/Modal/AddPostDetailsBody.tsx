@@ -1,8 +1,11 @@
-import { ArrowLeft, MapPin, Users } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight, ArrowLeft, Divide, LogIn, MapPin, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearImages } from "../../../utils/ReduxStore/Slice/postSlice";
 import { toast } from "sonner";
+import { log } from "console";
+import { PostData } from "../../../utils/interface/postInterface";
+import { AddPostFuntion } from "../../../utils/api/methods/PostService/Post/addPost";
 
 
 
@@ -25,11 +28,11 @@ const AddPostDetailsBody = ({setPostState}:any) => {
   const maxLength = 500;
 
   useEffect(() => {
-    setImageLength(post.images.length);
+    setImageLength(post.images[0].length);
     setSelectedImageIndex(0);
     console.log(selectedImageSrc,'PPPPP');
     
-    setSelectedImageSrc(post.images[0][0]);
+    setSelectedImageSrc(post.images[0][selectedImageIndex]);
   }, [post]);
 
 
@@ -61,11 +64,102 @@ const AddPostDetailsBody = ({setPostState}:any) => {
     setHideComment(!hideComment)
   }
 
+  const handleNext =()=>{
+    setSelectedImageIndex(selectedImageIndex + 1);
+    setSelectedImageSrc(post.images[0][selectedImageIndex +1]);
+  }
+
+  const handlePrev =()=>{
+    setSelectedImageIndex(selectedImageIndex - 1);
+    setSelectedImageSrc(post.images[0][selectedImageIndex  -1 ]);
+  }
 
 
-  const AddPost =()=>{
+
+
+  function generateRandomFilename() {
+    // Generate a random number and convert it to base 36
+    let random = Math.random().toString(36).substring(7);
+    
+    // Get the current timestamp
+    let timestamp = new Date().getTime();
+
+    // Concatenate the random number and timestamp to create the filename
+    return 'file_' + random + '_' + timestamp;
+}
+
+function base64toFile(base64StringArray:any) {
+    // Create an array to store the file objects
+    let files = [];
+    console.log(base64StringArray,"array");
+    
+    // Iterate over each Base64 string in the array
+    for (let i = 0; i < base64StringArray.length; i++) {
+        console.log(base64StringArray[i],"array[i]");
+        let base64String = base64StringArray[i];
+        const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
+        let filename = generateRandomFilename(); // Generate a random filename
+
+        // Decode the Base64 string
+        let byteCharacters = window.atob(base64Data);
+        console.log(byteCharacters,"bytch");
+        
+        let byteNumbers = new Array(byteCharacters.length);
+        for (let j = 0; j < byteCharacters.length; j++) {
+            byteNumbers[j] = byteCharacters.charCodeAt(j);
+        }
+        let byteArray = new Uint8Array(byteNumbers);
+
+        // Create a File from the decoded binary data
+        let file = new File([byteArray], filename + '.jpg', { type: 'application/octet-stream' });
+
+        // Push the file object to the array
+        files.push(file);
+    }
+
+    return files;
+}
+
+// Usage example
+
+
+
+
+
+
+
+const AddPost =async()=>{
+var files = base64toFile(post.images[0]);
+       
+console.log(files,"files");
+
+        
+        
+    const data:PostData ={
+        userId:'123',
+        description:text,
+        likes:[],
+        comments:[],
+        images:files,
+        shareCount:0,
+        tags:[],
+        location:{},
+        reports:[],
+        postCropSize:post.aspectRatio,
+        postType:'image',
+        showComment:hideComment,
+        showLikes:hideLike
+    } 
+    
+
+
+
+    const res:any=await AddPostFuntion({data})
+    console.log(res,'THIS is responce from the server');
     
   }
+
+
 
 
 
@@ -84,7 +178,7 @@ const AddPostDetailsBody = ({setPostState}:any) => {
             <p className="font-sans font-bold sm:font-semibold text-[#042F2C] text-md sm:text-lg">
               Create new post
             </p>
-            <p className="text-teal-800 font-bold text-md">Post</p>
+            <p className="text-teal-800 font-bold text-md" onClick={AddPost}>Post</p>
           </div>
         </div>
 
@@ -295,11 +389,28 @@ const AddPostDetailsBody = ({setPostState}:any) => {
                       </div>
                     </div>
                   </div>
+                 
                 </div>
               </div>
             </div>
           </div>
         </div>
+       <div className="flex justify-between">
+       {selectedImageIndex > 0 ? (
+        <>
+         <ArrowBigLeft className="text-black m-2" onClick={handlePrev}/>
+        </>
+       ):( <div className="text-black">  </div> )}
+       {selectedImageIndex < imglength - 1 ? (<>
+        <ArrowBigRight className="text-black m-2" onClick={handleNext}/>
+       </>) : ( <>
+       <div className="text-black"></div>
+       </>) }
+     
+      
+
+
+       </div>
       </div>
       </div>
     </>

@@ -1,4 +1,6 @@
-import {sayHello_usecase} from './postUsecases'
+import {sayHello_usecase,addPostUseCase} from './postUsecases'
 export {
-    sayHello_usecase
+    sayHello_usecase,
+    addPostUseCase
+
 }
