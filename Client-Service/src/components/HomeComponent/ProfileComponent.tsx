@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PostsComponent from "../SubHomeComponents/PostsComponent";
 import {Edit,X} from "lucide-react";
 import Highlight from "./HighlightComponent";
 import { addHighlightFunction } from "../../utils/api/methods";
 import { SetSidebarOpenFunction } from "src/pages/user/Home";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Profile: React.FC<SetSidebarOpenFunction> = ({setSidebarOpen}) => {
   console.log("I AM PROFILE");
   
+
+
+  
+
+
+
+
   const [highlightName, setHighlightName] = useState("");
   const [postComponent, setPostComponent] = useState(true);
   const [otherUser, setOtherUser] = useState(false);
@@ -131,9 +139,10 @@ const Profile: React.FC<SetSidebarOpenFunction> = ({setSidebarOpen}) => {
           <div className="not-prose relative rounded-xl overflow-x-auto scrollbar-hide">
             <div className="mt-3 flex justify-center lg:mt-8">
               <div className="flex justify-start w-72 sm:w-96 sm:gap-3 md:w-[460px] lg:w-[660px] lg:gap-9">
-                {highlightData.map((val) => {
+                {highlightData.map((val,index) => {
                   return (
                     <Highlight
+                    key={index}
                       extra={false as boolean}
                       setAddHighlight={setAddHighlight}
                     />

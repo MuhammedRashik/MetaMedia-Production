@@ -30,3 +30,4 @@ export const AddHighlight_Api=`${STORY_URL}/addHighlight`
 export const AddPost_Api=`/api/post/addPost`
 export const SearchLocation_Api='/api/post/searchLocation'
 export const getLatAndLong_Api='/api/post/getLatandLog'
+export const getUserPosts_Api='/api/post/getAllPost'

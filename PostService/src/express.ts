@@ -1,6 +1,8 @@
 import express, { Express,Request,Response } from "express";
 import cors from "cors";
+import path from 'path'
 const cookieParser = require("cookie-parser");
+
 import session, { SessionOptions, MemoryStore } from "express-session";
 const expresscofig = (app: Express): void => {
   const store = new MemoryStore();
@@ -9,7 +11,7 @@ const expresscofig = (app: Express): void => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser(process.env.COOKIEPARSERSECRET));
-  app.use(express.static('./public'))
+  app.use(express.static(path.join(__dirname, '../public')));
   app.use(
     cors({
       origin: ['http:client-srv:5173','http://metamedia.com','http://localhost:5173'],
