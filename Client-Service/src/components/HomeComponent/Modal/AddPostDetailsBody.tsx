@@ -6,25 +6,35 @@ import { toast } from "sonner";
 import { log } from "console";
 import { PostData } from "../../../utils/interface/postInterface";
 import { AddPostFuntion } from "../../../utils/api/methods/PostService/Post/addPost";
-
-
+import {Base64} from 'js-base64'
+import { searchLocationFuntion } from "../../../utils/api/methods/PostService/Post/searchLocaation";
+import {getLatAndLogFuntion} from '../../../utils/api/methods/PostService/Post/getLatAndLog'
+import { useNavigate } from "react-router-dom";
 
 const AddPostDetailsBody = ({setPostState}:any) => {
 
 
   const post = useSelector((state: any) => state.persisted.post);
+  const user= useSelector((state:any)=>state.persisted.user)
   console.log('LLL',post);
+  console.log('htis si user formthe this page',user.userData);
+  
   const dispatch=useDispatch()
+  const navigate=useNavigate()
   const [aspect, setAspect]: any = useState([1 / 1]);
   const [isOpen, setIsOpen] = useState(false);
   const [isTagOpen, setIsTagOpen] = useState(false);
+  const [isLocation,setIslocation]=useState(false)
   const [selectedImageSrc, setSelectedImageSrc] = useState(post.images[0][0]);
   const [text, setText] = useState("");
   const [imglength, setImageLength] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [hideLike,setHideLike]=useState(false)
   const [hideComment,setHideComment]=useState(false)
-
+  const [location,setLocation]=useState('')
+  const [responceLocation,setResponceLocatoin]=useState([])
+  const [selectedLocationlatAndLog,setSelectedLocationlatAndLog]:any=useState('')
+const [isSelected,setIsSelcted]=useState(false)
   const maxLength = 500;
 
   useEffect(() => {
@@ -53,6 +63,10 @@ const AddPostDetailsBody = ({setPostState}:any) => {
     dispatch(clearImages());
     setPostState(1);
   };
+
+  const searchLocationToggle=()=>{
+    setIslocation(!isLocation)
+  }
 
 
   const hancleHideLike =()=>{
@@ -89,41 +103,69 @@ const AddPostDetailsBody = ({setPostState}:any) => {
 }
 
 function base64toFile(base64StringArray:any) {
-    // Create an array to store the file objects
-    let files = [];
-    console.log(base64StringArray,"array");
-    
-    // Iterate over each Base64 string in the array
-    for (let i = 0; i < base64StringArray.length; i++) {
-        console.log(base64StringArray[i],"array[i]");
-        let base64String = base64StringArray[i];
-        const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
-        let filename = generateRandomFilename(); // Generate a random filename
+  // Create an array to store the file objects
+  let files = [];
+  
+  // Iterate over each Base64 string in the array
+  for (let i = 0; i < base64StringArray.length; i++) {
+      let base64String = base64StringArray[i];
+      const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
+      let filename = generateRandomFilename(); // Generate a random filename
 
-        // Decode the Base64 string
-        let byteCharacters = window.atob(base64Data);
-        console.log(byteCharacters,"bytch");
-        
-        let byteNumbers = new Array(byteCharacters.length);
-        for (let j = 0; j < byteCharacters.length; j++) {
-            byteNumbers[j] = byteCharacters.charCodeAt(j);
-        }
-        let byteArray = new Uint8Array(byteNumbers);
+      // Decode the Base64 string
+      let byteCharacters = Base64.atob(base64Data);
+      
+      let byteNumbers = new Array(byteCharacters.length);
+      for (let j = 0; j < byteCharacters.length; j++) {
+          byteNumbers[j] = byteCharacters.charCodeAt(j);
+      }
+      let byteArray = new Uint8Array(byteNumbers);
 
-        // Create a File from the decoded binary data
-        let file = new File([byteArray], filename + '.jpg', { type: 'application/octet-stream' });
+      // Create a File from the decoded binary data
+      let file = new File([byteArray], filename + '.jpg', { type: 'application/octet-stream' });
 
-        // Push the file object to the array
-        files.push(file);
-    }
+      // Push the file object to the array
+      files.push(file);
+  }
 
-    return files;
+  return files;
 }
 
-// Usage example
 
 
 
+useEffect(()=>{
+  const getData = setTimeout(async() => {
+    
+    const res=await searchLocationFuntion(location)
+    console.log('this is respoce form the bakend',res);
+
+    setResponceLocatoin(res)
+      
+  }, 2000)
+
+  return () => clearTimeout(getData)
+
+},[location])
+
+
+
+const selectLocation=async(data:any)=>{
+  console.log('HHHHHHHHHHHHHHHHHHHHHHH',data);
+  
+
+ const responce= await getLatAndLogFuntion(data.mapbox_id)
+ console.log(responce,'this is responce');
+ const savedPlace={
+  name:data.name,
+  lat:responce
+}
+console.log(responce,'this is responce----------',savedPlace);
+ setSelectedLocationlatAndLog({})
+ setSelectedLocationlatAndLog(savedPlace)
+ setIslocation(false)
+ setIsSelcted(true)
+}
 
 
 
@@ -131,35 +173,57 @@ function base64toFile(base64StringArray:any) {
 const AddPost =async()=>{
 var files = base64toFile(post.images[0]);
        
-console.log(files,"files");
+console.log(files,"files",user.userData);
 
+if ( user.userData == undefined ) {
+  toast.error("Please login to make this post");
+  navigate('login')
+  return;
+} else if (text.trim() === "") {
+  toast.error("Add a caption for your post");
+  return;
+        } else {
+          console.log(user.userDara,'htia is is ');
+          toast.success('here')
+          const data:PostData ={
+            userId:user.userData.userId,
+            description:text,
+            likes:[],
+            comments:[],
+            images:files,
+            shareCount:0,
+            tags:[],
+            location:selectedLocationlatAndLog,
+            reports:[],
+            postCropSize:post.aspectRatio,
+            postType:'image',
+            showComment:hideComment,
+            showLikes:hideLike
+        } 
         
+    
+    
+    
+        const res:any=await AddPostFuntion({data})
+        console.log(res,'THIS is responce from the server');
+        if(res.status){
+          setPostState(false)
+          toast.success("the status from the responce is true")
+          navigate('/profile')
+        }
         
-    const data:PostData ={
-        userId:'123',
-        description:text,
-        likes:[],
-        comments:[],
-        images:files,
-        shareCount:0,
-        tags:[],
-        location:{},
-        reports:[],
-        postCropSize:post.aspectRatio,
-        postType:'image',
-        showComment:hideComment,
-        showLikes:hideLike
-    } 
-    
-
-
-
-    const res:any=await AddPostFuntion({data})
-    console.log(res,'THIS is responce from the server');
-    
+        }
+        
+  
   }
 
 
+  const serchLocation=async(data:string)=>{
+    console.log(data,'JJJJJJJJ');
+    
+    setLocation(data)
+
+  }
 
 
 
@@ -178,7 +242,7 @@ console.log(files,"files");
             <p className="font-sans font-bold sm:font-semibold text-[#042F2C] text-md sm:text-lg">
               Create new post
             </p>
-            <p className="text-teal-800 font-bold text-md" onClick={AddPost}>Post</p>
+            <p className={text ? 'text-teal-800 font-bold text-md cursor-pointer' : 'text-white font-normal text-md'} onClick={text ? AddPost : undefined}>Post</p>
           </div>
         </div>
 
@@ -219,10 +283,87 @@ console.log(files,"files");
                     {text.length}/{maxLength}
                   </div>
                 </div>
-                <div className="w-full rounded-md shadow-lg h-1/6 border  mt-2  ">
-                  <div className="text-teal-900 pt-8 text- flex justify-between items-center ">
-                    <p className="font-semibold pl-2"> Add Location</p>
-                    <MapPin />
+                <div className="w-full rounded-md shadow-lg h-1/6 border border-b-gray-100  mt-2 overflow-visible">
+                  <div className="text-teal-900 pt-8 text- flex justify-between items-center">
+                    {/* Dropdown */}
+                    <div className="relative">
+                      <div className="flex justify-evenly" onClick={searchLocationToggle}>
+                     <div className="flex">
+                     <button
+                        id="dropdownToggleButton"
+                        
+                        className="text-black   focus:outline-none  font-medium rounded-lg text-sm  pl-2 text-center inline-flex items-center"
+                        type="button"
+                      >
+
+                        {isSelected ? (<>
+                          {selectedLocationlatAndLog?.name}
+                        </>) : (<>
+                        
+                        Location
+                        </>)}
+                       
+                      </button>
+
+                     </div>
+                     <div className="flex ml-48 ">
+
+                      <MapPin/>
+                     </div>
+
+                      </div>
+                      
+                      {/* Dropdown menu */}
+                      <div
+                        id="dropdownToggle"
+                        className={`absolute z-10 ${
+                          isLocation ? "" : "hidden"
+                        } bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-white border top-full left-0 mt-1`}
+                      >
+
+                        {!isSelected ? (<>
+                          <ul
+                          className="p-3 space-y-1 text-sm text-teal-700 dark:text-teal-800 overflow-y-auto h-52"
+                          aria-labelledby="dropdownToggleButton"
+                        >
+                          <li>
+                            <>
+                            {responceLocation.length > 0 ? (
+  <ul>
+    {responceLocation.map((item: any, index: number) => (
+      <li key={index} onClick={()=>selectLocation(item)}>
+        <div className="flex items-center px-4 py-2 border-b cursor-pointer">
+          {item.name}
+        </div>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p>search your location</p>
+)}
+                             
+                            </>
+                          </li>
+                        </ul>
+  
+                        </>) :(<>
+
+                        <ul
+                          className="p-3 space-y-1 text-sm text-teal-700 dark:text-teal-800 overflow-y-auto h-52"
+                          aria-labelledby="dropdownToggleButton"
+                        > 
+                        <li>
+
+<ul>
+  {selectedLocationlatAndLog?.name}
+</ul>
+
+                        </li>
+                        </ul>
+                        </>)}
+                                              <input type="text"  className="flex items-center p-3 text-sm border   font-medium  w-full  outline-none border-t  rounded-b-lg bg-gray-50   hover:underline hover:w-full " placeholder="Search location .." onChange={(e)=>serchLocation(e.target.value)} />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="w-full rounded-md shadow-lg h-1/6 border border-b-gray-100  mt-2 overflow-visible">

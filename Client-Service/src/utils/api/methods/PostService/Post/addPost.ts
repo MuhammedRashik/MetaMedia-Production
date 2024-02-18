@@ -15,7 +15,9 @@ formData.append('userId',userId)
 formData.append('description',description)
 formData.append('likes',likes)
 formData.append('comments',comments)
-formData.append('images',images)
+images.forEach((file:any) => {
+    formData.append(`images`, file);
+});
 formData.append('location',location)
 formData.append('postCropSize',postCropSize)
 formData.append('postType',postType)
@@ -37,7 +39,11 @@ console.log(userId,'ths is is id');
             withCredentials : true,
         }).post(AddPost_Api, formData);
 
+        console.log('this is responce..',response);
+        
+
         return response.data;
+
     } catch (err) {
         console.log('hello form error',err);
         

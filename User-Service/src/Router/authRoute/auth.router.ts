@@ -12,6 +12,8 @@ export default (dependencies:any)=>{
 
     router.post('/login',validateLogin,loginUserController)
     router.post('/addProfile',addProfileController)
+   
+    // router.post('/changePassword',changePasswordController)
 
    router.post('/user/')
     return router

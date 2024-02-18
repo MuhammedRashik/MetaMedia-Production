@@ -12,25 +12,13 @@ const expresscofig = (app: Express): void => {
   app.use(express.static('./public'))
   app.use(
     cors({
-      origin: 'http:client-srv:5173',
+      origin: ['http:client-srv:5173','http://metamedia.com','http://localhost:5173'],
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
     })
   );
 
-  app.use((req:Request, res:Response, next) => {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://metamedia.com');
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
-    res.setHeader('Access-Control-Allow-Origin', 'http:client-srv:5173');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', "true");
-    if (req.method === 'OPTIONS') {
-      res.sendStatus(200); 
-    } else {
-      next();
-    }
-});
+  
   app.use(
     session({
       secret: process.env.SESSION_SECRET_KEY,

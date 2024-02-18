@@ -1,13 +1,18 @@
-import {sayHelloRepo} from '../../adapters/repositories'
-import {sayHello_usecase,addPostUseCase} from '../../applications/useCases'
+import {sayHelloRepo,createPostRepo} from '../../adapters/repositories'
+
+import {sayHello_usecase,addPostUseCase,searchLocation_useCase,getLatAndLog_useCase} from '../../applications/useCases'
 
 
 const useCase:any={
     sayHello_usecase,
-    addPostUseCase
+    addPostUseCase,
+    searchLocation_useCase,
+    getLatAndLog_useCase
 }
 const repositery:any={
-    sayHelloRepo
+    sayHelloRepo,
+    createPostRepo
+
 }
 
 

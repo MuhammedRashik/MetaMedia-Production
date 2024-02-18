@@ -1,20 +1,32 @@
-import {Request,Response} from 'express'
+import { Request, Response } from "express";
+export default (dependencies: any) => {
+    const { addPostUseCase } = dependencies.useCase;
 
+    const addPostController = async (req: Request, res: Response) => {
+      try {
+        const { body, files } = req;
+        if (!files || !Array.isArray(files)) {
+          return res.status(400).json({ message: "No files uploaded" });
+        }
+        const images: string[] = files.map((file: Express.Multer.File) => file.filename);
+        const data = {
+          images,
+          data: body,
+        };
+  
+        const response = await addPostUseCase(dependencies).executeFunction(data);
+  if(response.status){
 
-
-export default (dependecies:any)=>
-{
-    const {useCase :{addPostUseCase}}=dependecies
-
-    const addPostController=async(req:Request,res:Response)=>{
-
-        const body=req.body
-        console.log('this is file',req.files);
-        console.log(req.body,'this is ikages');
-        const responce = await addPostUseCase(dependecies).executeFunction()
-        res.send(responce)
-
-    }
-
-    return addPostController
-}
+      return res.status(200).json({status:true,data:response});
+  }else{
+    return res.status(400).json({message:"Error hapence"})
+  }
+     
+      } catch (error) {
+        console.error("Error in addPostController:", error);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+    };
+  
+    return addPostController;
+};

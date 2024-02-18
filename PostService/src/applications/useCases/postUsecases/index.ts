@@ -1,6 +1,10 @@
 import {sayHello_usecase} from './sayHello_usecase'
 import {addPostUseCase} from './addPost_useCase'
+import {searchLocation_useCase} from './searchLocation_useCase'
+import {getLatAndLog_useCase} from './getLatAndLog_useCase'
 export {
     sayHello_usecase,
-    addPostUseCase
+    addPostUseCase,
+    searchLocation_useCase,
+    getLatAndLog_useCase
 }

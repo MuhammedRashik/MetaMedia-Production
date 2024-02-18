@@ -8,7 +8,7 @@ export const SignUp_Api = `${AUTH_URL}/signup`
 export const VerifyOtp_Api = `${AUTH_URL}/verifyOtp`
 export const LoginWithGoogle_Api=`${AUTH_URL}/loginWithGoogle`
 export const LoginWithFacebook_Api=`${AUTH_URL}/loginWithFaceBook`
-export const ChooseInterest_Api=`${USER_URL}/chooseInterest`
+export const ChooseInterest_Api=`${AUTH_URL}/chooseInterest`
 export const ForgotPassword_Api=`${AUTH_URL}/forgotPassword`
 export const ChangePassword_Api=`${AUTH_URL}/changePassword`
 export const RefreshToken_Api=`${AUTH_URL}/refresh`
@@ -28,3 +28,5 @@ export const AddHighlight_Api=`${STORY_URL}/addHighlight`
 // POST SERVICE
 
 export const AddPost_Api=`/api/post/addPost`
+export const SearchLocation_Api='/api/post/searchLocation'
+export const getLatAndLong_Api='/api/post/getLatandLog'

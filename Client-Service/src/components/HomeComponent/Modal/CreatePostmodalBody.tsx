@@ -24,49 +24,44 @@ const CreatePostModalBody = ({setIsAddPost,setPostState}:any) => {
       }
     };
     const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const formData = new FormData();
-        const files = e.target.files;
-        console.log('this is the file',files);
-        
-    
-        if (files) {
-            console.log('hii');
-            dispatch(clearImages())
-            for (let i = 0; i < files.length; i++) {
-                console.log(i);
-
-                // if (event.target.files && event.target.files[0]) {
-                //     setImage(URL.createObjectURL(event.target.files[0]));
-                //   }
-                
-                const file:any = files[i];
-                const reader = new FileReader();
+      const formData = new FormData();
+      const files = e.target.files;
+  
+      if (files) {
+          dispatch(clearImages());
+  
+          for (let i = 0; i < files.length; i++) {
+              const file = files[i];
               
-
-                reader.onload = (e:any) => {
-                    const imageDataURL = e.target.result;
-                  console.log('JJ',imageDataURL);
-                  
-                    
-                    dispatch(addImage(imageDataURL))
-                    
-                }
-                formData.append("files[]", file);
-                reader.readAsDataURL(file);
-
-                // Dispatch addImage action for images
-                if (file.type.startsWith('image/')) {
-                    // dispatch(addImage(file)); 
-                } else if (file.type.startsWith('video/')) {
-                    // dispatch(addVideo(file));
-                }
-            }
-            setPostState(2)
-        }
-    
-        // Additional logic as needed
-        
-    };
+              // Check if the file is an image
+              if (file.type.startsWith('image/')) {
+                  const reader = new FileReader();
+  
+                  reader.onload = (e:any) => {
+                      const imageDataURL = e.target.result;
+                      console.log('this is imgage data url',imageDataURL);
+                      
+                      dispatch(addImage(imageDataURL));
+                  };
+  
+                  reader.readAsDataURL(file);
+              } 
+              // Check if the file is a video
+              else if (file.type.startsWith('video/')) {
+                  // Dispatch addVideo action for videos if needed
+                  // dispatch(addVideo(file));
+              } else {
+                  // Handle invalid file types
+                  console.error('Invalid file type:', file.type);
+                  continue; // Skip to the next file
+              }
+  
+              formData.append("files[]", file);
+          }
+  
+          setPostState(2);
+      }
+  };
   
     const openCamara = () => {
       setCamaraOn(true);

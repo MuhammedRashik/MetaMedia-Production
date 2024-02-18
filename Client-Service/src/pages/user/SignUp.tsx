@@ -18,7 +18,7 @@ import { ResponseData } from "src/utils/interface/userInterface";
 
 const SignUp = () => {
   const userData=useSelector((state:any)=>state.persisted.user.userData)
-  console.log(userData,"USERRRRDDAAATTAAA");
+  console.log(userData,"USERRRRDAAATTAAA");
   
   const dispatch = useDispatch()
   const Navigate = useNavigate();
@@ -196,7 +196,7 @@ const SignUp = () => {
                 className="p-5 outline-noneborder  border-amber-100 h-10 w-full rounded-md text-teal-800 placeholder:font-thin placeholder:text-zinc-300 placeholder:text-sm"
                 placeholder="abc"
                 type="text"
-                value="Able K Saju"
+               
                 {...register("name")}
               />
               <p className="text-red-600 text-xs text-start">
@@ -211,7 +211,7 @@ const SignUp = () => {
                 className="p-5 outline-none border border-amber-100 h-10 w-full rounded-md text-teal-800 placeholder:font-thin placeholder:text-zinc-300 placeholder:text-sm"
                 placeholder="abc@gmai.com"
                 type="text"
-                value="ableksaju3@gmail.com"
+                
                 {...register("email")}
               />
               <p className="text-red-600 text-xs text-start">
@@ -226,7 +226,7 @@ const SignUp = () => {
                 className=" p-5 outline-none border border-amber-100 h-10 w-full rounded-md text-teal-800 placeholder:font-thin placeholder:text-zinc-300 placeholder:text-sm"
                 placeholder="********"
                 type="text"
-                value="1234"
+                 
                 {...register("password")}
               />
               <p className="text-red-600 text-xs text-start">

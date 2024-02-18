@@ -17,6 +17,8 @@ const loginusercontroller=async(req:Request,res:Response)=>{
     }
     //exicute usecase
     const responce=await loginUser_usecases(dependecies).executeFunction(email,password)
+    console.log('this si  respoce',responce);
+    
     //access token 
     if(!responce.status){
         res.json({message:responce?.message,status:false})

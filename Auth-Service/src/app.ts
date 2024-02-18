@@ -36,13 +36,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIEPARSERSECRET));
 app.use(
    cors({
-     origin: "http://localhost:5173",
+     origin: ["http://localhost:5173","http:metamedia.com","http:client-srv:5173" ],
      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
      credentials: true,
    })
  );
 
-app.use(
+app.use( 
     session({
       secret: process.env.SESSION_SECRET_KEY,
       resave: false,

@@ -19,7 +19,7 @@ const CommentSchema:Schema = new mongoose.Schema({
 const PostSchema=new mongoose.Schema({
     userId:mongoose.Schema.Types.ObjectId,
     description:String,
-    mediaUrl:String,
+    mediaUrl:[],
     likes:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -33,7 +33,7 @@ const PostSchema=new mongoose.Schema({
     location: {
         latitude: Number,
         longitude: Number,
-        status:Boolean
+        name:String
     },
     reports:[{
         userId:mongoose.Schema.Types.ObjectId,

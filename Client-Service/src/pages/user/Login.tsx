@@ -92,6 +92,8 @@ const Login = () => {
   const handleGoogle = async(e: any) => {
     e.preventDefault();
     await GoogleAuth().then(async (data: any) => {
+      console.log(data,'thi si dataaaaaa');
+      
       const userData = {
         profile: data.user.photoURL,
         email: data.user.email,

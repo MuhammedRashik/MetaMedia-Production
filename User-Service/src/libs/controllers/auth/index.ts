@@ -4,5 +4,6 @@ export default (dependencies:any)=>{
    return{
     loginUserController:loginUserController(dependencies),
     loginWithGoogle:loginWithGoogleController(dependencies)
+   //  chooseInterestController:chooseInterestController(dependencies),
    }
 }

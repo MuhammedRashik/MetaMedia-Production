@@ -38,7 +38,7 @@ dotenv.config()
  app.use(express.json());
  app.use(express.urlencoded({ extended: false }));
  app.use(cookieParser(process.env.COOKIEPARSERSECRET));
- const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+ const allowedOrigins = ["http://localhost:5173","http:metamedia.com","http:client-srv:5173" ];
  app.use(
     cors({
       origin:allowedOrigins,

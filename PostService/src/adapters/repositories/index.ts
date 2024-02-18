@@ -1,4 +1,6 @@
-import {sayHelloRepo} from './postrepositery'
+import {sayHelloRepo} from './sayHelloRepo'
+import {createPostRepo} from './createPostRepo'
 export {
-    sayHelloRepo
+    sayHelloRepo,
+    createPostRepo
 }
