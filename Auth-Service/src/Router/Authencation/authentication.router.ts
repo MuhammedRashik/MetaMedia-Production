@@ -5,7 +5,7 @@ import {validateSignup,validateOtp,validateLogin,validateGoogleLogin} from '../.
 export default (dependencies:any)=> {
     const router=express()
 
-    const {createUserController,verifyOtpController,chooseInterestController,logoutUserController,verifyPasswordController,loginWithGoogleController,loginWithFacebookController,changePasswordController,forgotPasswordController,loginUserController,refreshTokenController,imageController}=AuthencationController(dependencies)
+    const {createUserController,verifyOtpController,chooseInterestController,logoutUserController,verifyPasswordController,loginWithGoogleController,loginWithFacebookController,changePasswordController,forgotPasswordController,loginUserController,refreshTokenController,imageController,getAllUserController,getUsersByNameController}=AuthencationController(dependencies)
 
     const {addProfileController} =AddProfileController(dependencies)
 
@@ -26,6 +26,7 @@ export default (dependencies:any)=> {
     router.post('/loginWithFaceBook',loginWithFacebookController)
     router.get('/refresh',refreshTokenController)
     router.get('/img',imageController)
-
+    router.get("/getAllUsers",getAllUserController)
+    router.post('/getUsersByname',getUsersByNameController)
     return router
 }

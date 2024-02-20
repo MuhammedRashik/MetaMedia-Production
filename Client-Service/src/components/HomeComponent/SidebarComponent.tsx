@@ -79,7 +79,7 @@ const Sidebar = ({ open,setIsAddPost,isAddPost}:any) => {
       <div
         className={` ${
           open ? "w-60" : "w-20 "
-        } bg-[#07312E] h-screen p-5 z-30  rounded-tr-lg rounded-br-lg pt-8 relative duration-300 `}
+        } bg-[#07312E] h-screen p-5 z-10  rounded-tr-lg rounded-br-lg pt-8 relative duration-300 `}
       >
         {/* <Menu/> */}
         <svg

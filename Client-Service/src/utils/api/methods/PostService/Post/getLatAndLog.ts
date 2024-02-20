@@ -8,7 +8,7 @@ const bakendData={
 }
 
     const response = await  axios.create({
-        baseURL:BASE_URL,
+        baseURL:'http://localhost:3002',
         withCredentials : true,
     }).post(getLatAndLong_Api,bakendData );
 

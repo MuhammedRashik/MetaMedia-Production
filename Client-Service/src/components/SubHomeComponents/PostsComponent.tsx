@@ -5,14 +5,14 @@ import { getAllPostOfUserFunction } from "../../utils/api/methods/PostService/ge
 import { toast } from "sonner";
 const PostsComponent = () => {  
 
-  const [posts,setPosts]:any=useState([])
+  const [posts,setPosts]=useState([])
 
   const user=  useSelector((state:any)=>state.persisted.user)
   useEffect(()=>{
     if(user == undefined){
       toast.error("no user fund")
     }else{
-toast.success('user fund')
+
     }
 
   },[])
@@ -32,9 +32,9 @@ useEffect(()=>{
 
         
         if(response.status){
-
-          setPosts(response.data)
-          toast.success('post are here')
+const data=response.data
+          setPosts(data)
+          
         }
 
         
@@ -53,7 +53,9 @@ useEffect(()=>{
 
 
 useEffect(()=>{
-  console.log(posts,'HHHHHH');
+  console.log(posts,'this is posts ');
+  console.log(posts.length,'this is posts lenght');
+
   
 },[posts])
 
@@ -63,30 +65,25 @@ useEffect(()=>{
       <div className="flex flex-wrap flex-row justify-center mt-5 pb-20">
         <div className="grid grid-cols-3 gap-0.5 md:gap-4 p-0.5">
 
-        <div className="max-w-64">
-  <img className=" border border-amber-10"
-    src='https://i.pinimg.com/736x/44/ce/dc/44cedc9b6604a482384861e0093f96a0.jpg'
-    alt=""
-  />
-</div>
-{posts.length > 0 && (
+       
 <>
-{posts.map((item:any)=>{
-  {console.log(item,"JJJJJJJ")
-  }
-  <div className="max-w-64">
-  <img className=" border border-amber-10"
-    src={`http://metamedia.com/api/post/public/postData/${item.mediaUrl[0]}`}
-    alt=""
-  />
-</div>
-   
+{posts.length > 0 && posts.map((item:any) => {
+  console.log(item, "JJJJJJJ");
+return (
+  
+    <div className="max-w-64" key={item.id}> {/* Adding a key to each mapped element */}
+      <img className=" border border-amber-10"
+        src={`http://localhost:3002/img/${item.mediaUrl[0]}`}
+        alt=""
+      />
+    </div>
+)
 
 })}
 
 </>
 
-)}
+
           
           
           

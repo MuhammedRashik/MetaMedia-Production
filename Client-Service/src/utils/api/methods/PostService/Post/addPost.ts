@@ -34,7 +34,7 @@ console.log(data,'this is data');
 
 console.log(userId,'ths is is id');   
         const response = await  axios.create({
-            baseURL:BASE_URL,
+            baseURL:'http://localhost:3002',
             headers: {'Content-Type' : 'multipart/form-data'},
             withCredentials : true,
         }).post(AddPost_Api, formData);

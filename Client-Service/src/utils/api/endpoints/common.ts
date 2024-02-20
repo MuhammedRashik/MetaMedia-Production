@@ -12,7 +12,8 @@ export const ChooseInterest_Api=`${AUTH_URL}/chooseInterest`
 export const ForgotPassword_Api=`${AUTH_URL}/forgotPassword`
 export const ChangePassword_Api=`${AUTH_URL}/changePassword`
 export const RefreshToken_Api=`${AUTH_URL}/refresh`
-
+export const GetAllUsers_Api=`${AUTH_URL}/getAllUsers`
+export const getUsersByName_Api=`${AUTH_URL}/getUsersByname`
 // USER SERVICE
 
 export const AddProfile_Api=`${USER_URL}/addProfile`

@@ -99,6 +99,32 @@ export default {
    }
 
 
+  },
+
+  getAllUsers:async()=>{
+    const users=await schema.User.find()
+    if(users){
+      return { status:true,data:users}
+    }else{
+
+    return {status:false}
+     
+    }
+
+  },
+  getUsersByName:async(name:string)=>{
+    if (name.trim() !== '') {
+      const users= await schema.User.find({ 'basicInformation.fullName': { $regex: '^' +name , $options: 'i' } })
+      if(users.length > 0){
+        return { status:true,data:users}
+      } else {
+        return {status:false}
+      }
+    } else {
+      console.log('here kkk');
+      
+      return {status:false}
+    }
   }
 
   //  verifyPassword:async(email,password:string)=>{

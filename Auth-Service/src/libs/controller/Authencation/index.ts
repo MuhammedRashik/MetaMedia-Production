@@ -10,7 +10,8 @@ import chooseInterestController from './chooseInterestController'
 import refreshTokenController from './refreshToken.controller'
 import logoutUserController from './logoutUserController'
 import imageController from './imgController'
-
+import getAllUserController from './getAllUser.controller'
+import getUsersByNameController from './getUsersByName.Controller'
 export default (dependencies:any)=>{
     return {
         createUserController:create_user_controller(dependencies),
@@ -24,6 +25,8 @@ export default (dependencies:any)=>{
         changePasswordController:changePasswordController(dependencies),
         refreshTokenController:refreshTokenController(dependencies),
         logoutUserController:logoutUserController(dependencies),
-        imageController:imageController(dependencies)
+        imageController:imageController(dependencies),
+        getAllUserController:getAllUserController(dependencies),
+        getUsersByNameController:getUsersByNameController(dependencies)
     }
 }

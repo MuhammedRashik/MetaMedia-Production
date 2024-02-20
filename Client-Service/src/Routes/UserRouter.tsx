@@ -16,6 +16,7 @@ import Settings from "../pages/user/Settings";
 import AddPostModal from "../components/HomeComponent/AddPostcomponent";
 import SizeSelectModal from "../components/HomeComponent/SizeSelectModal";
 import SelectPostModal from "../components/HomeComponent/SelectPostModal";
+import SinglePostModal from "../components/postComponent/SinglePostModal";
 // import TestCrop from "../components/HomeComponent/Modal/testCrop";
 
 
@@ -24,7 +25,10 @@ import SelectPostModal from "../components/HomeComponent/SelectPostModal";
 
 
 const UserRouter = () => {
-  return (
+  return (  
+    <>
+   
+    <SinglePostModal/>
     <Routes>
       <Route path="/*" element={<Home />} />
       <Route path="/signup" element={<SignUp />} />
@@ -48,7 +52,7 @@ const UserRouter = () => {
       {/* <Route path="/logout"/> */}
 
     </Routes>
-    
+    </>
   );
 };
 
