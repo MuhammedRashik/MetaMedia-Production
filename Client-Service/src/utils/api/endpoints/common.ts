@@ -14,6 +14,7 @@ export const ChangePassword_Api=`${AUTH_URL}/changePassword`
 export const RefreshToken_Api=`${AUTH_URL}/refresh`
 export const GetAllUsers_Api=`${AUTH_URL}/getAllUsers`
 export const getUsersByName_Api=`${AUTH_URL}/getUsersByname`
+export const getuserById_Api=`${AUTH_URL}/getUserById`
 // USER SERVICE
 
 export const AddProfile_Api=`${USER_URL}/addProfile`
@@ -32,3 +33,4 @@ export const AddPost_Api=`/api/post/addPost`
 export const SearchLocation_Api='/api/post/searchLocation'
 export const getLatAndLong_Api='/api/post/getLatandLog'
 export const getUserPosts_Api='/api/post/getAllPost'
+export const showAllPost_Api='api/post/showAllPost'

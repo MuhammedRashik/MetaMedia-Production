@@ -3,7 +3,7 @@ import AddPostDetailsBody from "./AddPostDetailsBody"
 import CreatePostModalBody from "./CreatePostmodalBody"
 import CropImageBody from "./CropimageBody"
 
-const MainModalBorderPost=({setIsAddPost}:any)=>{
+const MainModalBorderPost=({setIsAddPost,addPost,setAddPost}:any)=>{
 
     const [postState,setPostState]=useState(1)
 
@@ -17,7 +17,7 @@ const MainModalBorderPost=({setIsAddPost}:any)=>{
 
          {postState === 1 && <CreatePostModalBody setIsAddPost={setIsAddPost} setPostState={setPostState} />}
         {postState === 2 && <CropImageBody setPostState={setPostState} />}
-        {postState === 3 && <AddPostDetailsBody setPostState={setPostState} />}
+        {postState === 3 && <AddPostDetailsBody setPostState={setPostState} addPost={addPost} setAddPost={setAddPost}/>}
 
 
 

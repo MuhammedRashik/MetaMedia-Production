@@ -125,6 +125,14 @@ export default {
       
       return {status:false}
     }
+  },
+  getUserById:async(id:any)=>{
+    const user=await schema.User.findById(id)
+    if(user){
+      return {status:true,data:user}
+    }else{
+      return {status:false}
+    }
   }
 
   //  verifyPassword:async(email,password:string)=>{

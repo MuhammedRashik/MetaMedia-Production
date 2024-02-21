@@ -12,6 +12,7 @@ import logoutUserController from './logoutUserController'
 import imageController from './imgController'
 import getAllUserController from './getAllUser.controller'
 import getUsersByNameController from './getUsersByName.Controller'
+import getUserById_Controller from './getUserById_Controller'
 export default (dependencies:any)=>{
     return {
         createUserController:create_user_controller(dependencies),
@@ -27,6 +28,7 @@ export default (dependencies:any)=>{
         logoutUserController:logoutUserController(dependencies),
         imageController:imageController(dependencies),
         getAllUserController:getAllUserController(dependencies),
-        getUsersByNameController:getUsersByNameController(dependencies)
+        getUsersByNameController:getUsersByNameController(dependencies),
+        getUserById_Controller:getUserById_Controller(dependencies)
     }
 }

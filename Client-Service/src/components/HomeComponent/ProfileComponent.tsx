@@ -7,15 +7,13 @@ import { SetSidebarOpenFunction } from "src/pages/user/Home";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Profile: React.FC<SetSidebarOpenFunction> = ({setSidebarOpen}) => {
+const Profile = ({setSidebarOpen,isAddPost}:any) => {
   console.log("I AM PROFILE");
   
 
 
   
-
-
-
+ 
 
   const [highlightName, setHighlightName] = useState("");
   const [postComponent, setPostComponent] = useState(true);
@@ -225,8 +223,8 @@ const Profile: React.FC<SetSidebarOpenFunction> = ({setSidebarOpen}) => {
         </p>
       </div>
       <div className="lg:px-16">
-        {postComponent && <PostsComponent />}
-        {!postComponent && <PostsComponent />}
+        {postComponent && <PostsComponent isAddPost={isAddPost}/>}
+        {!postComponent && <PostsComponent isAddPost={isAddPost}/>}
       </div>
       </div>
 

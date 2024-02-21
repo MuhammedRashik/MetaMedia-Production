@@ -20,7 +20,7 @@ import { getLatAndLogFuntion } from "../../../utils/api/methods/PostService/Post
 import { useNavigate } from "react-router-dom";
 import { getUsersByNameFunction } from "../../../utils/api/methods/AuthService/post";
 
-const AddPostDetailsBody = ({ setPostState }: any) => {
+const AddPostDetailsBody = ({ setPostState,addPost,setAddPost }: any) => {
   const post = useSelector((state: any) => state.persisted.post);
   const user = useSelector((state: any) => state.persisted.user);
   console.log("LLL", post);
@@ -217,6 +217,7 @@ const AddPostDetailsBody = ({ setPostState }: any) => {
       const res: any = await AddPostFuntion({ data });
       console.log(res, "THIS is responce from the server");
       if (res.status) {
+        setAddPost(!addPost)
         setPostState(false);
         toast.success("the status from the responce is true");
         navigate("/profile");

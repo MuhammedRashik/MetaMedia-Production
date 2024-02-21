@@ -10,7 +10,8 @@ import {
   loginUser_usecases,
   refreshTokenUsecase,
   getAllUsers_usecasse,
-   getUsersByName_Usecase
+   getUsersByName_Usecase,
+   getUsersById_Usecase
 } from "./Authentication";
 
 import { addProfile_Usecase } from "./Profile";
@@ -28,5 +29,6 @@ export {
   chooseInterest_Usecase,
   refreshTokenUsecase,
   getAllUsers_usecasse,
-  getUsersByName_Usecase
+  getUsersByName_Usecase,
+  getUsersById_Usecase
 };

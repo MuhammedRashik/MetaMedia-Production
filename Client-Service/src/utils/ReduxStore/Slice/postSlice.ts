@@ -30,7 +30,7 @@ const postSlice = createSlice({
         removeVideo: (state:any, action:any) => {
             state.videos = state.videos.filter((video :any) => video !== action.payload);
         },
-        clearVideos: (state:any, action:any) => {
+        clearVideos: (state:any) => {
             state.videos = [];
         },
         setAspectRatio: (state, action) => {

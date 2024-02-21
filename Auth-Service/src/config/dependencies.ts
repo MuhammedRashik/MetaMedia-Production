@@ -1,5 +1,20 @@
 import  {authenticationRepository,profileRepository} from '../libs/app/repository/index'
-import {createUser_Usecases,chooseInterest_Usecase,changePassword_Usecase,verifyOtp_Usecase,verifyEmail_Usecases,verifyPassword_Usecase,loginWithGoogle_Usecase,loginWithFacebook_Usecase, addProfile_Usecase,loginUser_usecases,refreshTokenUsecase,getAllUsers_usecasse,getUsersByName_Usecase} from '../libs/usecases'
+import {
+  createUser_Usecases,
+  chooseInterest_Usecase,
+  changePassword_Usecase,
+  verifyOtp_Usecase,
+  verifyEmail_Usecases,
+  verifyPassword_Usecase,
+  loginWithGoogle_Usecase,
+  loginWithFacebook_Usecase,
+   addProfile_Usecase,
+  loginUser_usecases,
+  refreshTokenUsecase,
+  getAllUsers_usecasse,
+  getUsersByName_Usecase,
+  getUsersById_Usecase
+} from '../libs/usecases'
 
 
 const useCase:any={
@@ -15,7 +30,8 @@ const useCase:any={
   chooseInterest_Usecase,
   refreshTokenUsecase,
   getAllUsers_usecasse,
-  getUsersByName_Usecase
+  getUsersByName_Usecase,
+  getUsersById_Usecase
   
 }
 

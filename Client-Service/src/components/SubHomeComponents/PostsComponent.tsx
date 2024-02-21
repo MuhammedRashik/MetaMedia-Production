@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { UseSelector, useSelector } from "react-redux";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllPostOfUserFunction } from "../../utils/api/methods/PostService/get/getAllPostOfUser";
+import { getUserByIdFuntion} from "../../utils/api/methods/AuthService/post";
 import { toast } from "sonner";
-const PostsComponent = () => {  
+import {addPostData,clearPostData,isSinglePostModalOpen,clearPostUserData,setPostUserData} from '../../utils/ReduxStore/Slice/singlePostSlice'
+const PostsComponent = ({isAddPost}:any) => {  
 
   const [posts,setPosts]=useState([])
-
-  const user=  useSelector((state:any)=>state.persisted.user)
+ 
+  const user= useSelector((state:any)=>state.persisted.user)
   useEffect(()=>{
     if(user == undefined){
       toast.error("no user fund")
-    }else{
-
     }
-
   },[])
  const navigate=useNavigate()
+ const dispatch=useDispatch()
 
+ const handlePostClick=async(item:any)=>{
+
+
+
+const responce=await getUserByIdFuntion(item.userId)
+
+
+if(responce.status){
+
+  dispatch(clearPostData())
+  dispatch(clearPostUserData())
+  dispatch(setPostUserData(responce.data))
+  dispatch(addPostData(item))
+  dispatch(isSinglePostModalOpen())
+
+}else{
+  toast.error('Api call fail')
+}
+
+ 
+ }
 
 useEffect(()=>{
   const fetchData = async () => {
@@ -34,7 +55,7 @@ useEffect(()=>{
         if(response.status){
 const data=response.data
           setPosts(data)
-          
+          navigate('/profile')
         }
 
         
@@ -49,7 +70,7 @@ const data=response.data
 
   fetchData(); // Call the async function immediately
 
-},[user])   
+},[user,isAddPost])   
 
 
 useEffect(()=>{
@@ -71,7 +92,7 @@ useEffect(()=>{
   console.log(item, "JJJJJJJ");
 return (
   
-    <div className="max-w-64" key={item.id}> {/* Adding a key to each mapped element */}
+    <div className="max-w-64" key={item.id} onClick={()=>handlePostClick(item)}> {/* Adding a key to each mapped element */}
       <img className=" border border-amber-10"
         src={`http://localhost:3002/img/${item.mediaUrl[0]}`}
         alt=""

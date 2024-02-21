@@ -2,7 +2,7 @@ import axios from "axios";
 import client from '../../baseUrl/axios.baseUrl'
 import { UserData } from "../../../interface/userInterface";
 
-import {Login_Api,SignUp_Api,VerifyOtp_Api,LoginWithGoogle_Api,AddProfile_Api,ForgotPassword_Api,ChangePassword_Api,LoginWithFacebook_Api, ChooseInterest_Api, Logout_APi,RefreshToken_Api, getUsersByName_Api} from "../../endpoints/common";
+import {Login_Api,SignUp_Api,VerifyOtp_Api,LoginWithGoogle_Api,AddProfile_Api,ForgotPassword_Api,ChangePassword_Api,LoginWithFacebook_Api, ChooseInterest_Api, Logout_APi,RefreshToken_Api, getUsersByName_Api,getuserById_Api} from "../../endpoints/common";
 
 export const LoginFuntion = async (data: any) => {
   try {
@@ -123,3 +123,21 @@ return response.data
  }
 }
 
+
+export const getUserByIdFuntion=async (data:any)=>{
+ try {
+  const datas={
+    id:data
+  }
+  const response= await  axios.create({
+    baseURL:'http://localhost:3001',
+    withCredentials : true,
+  }).post(getuserById_Api,datas);
+  
+  return response.data
+  
+ } catch (error) {
+  console.log('Eroor froom getUserByIdFuntion',error);
+  
+ }
+}

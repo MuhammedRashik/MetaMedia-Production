@@ -22,16 +22,17 @@ export interface SetSidebarOpenFunction {
 const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const [isAddPost,setIsAddPost] = useState(false)
+  const [addPost,setAddPost] = useState(false)
  
   return (
     <>
    
 
 
-        <AsideComponent sidebarOpen={sidebarOpen} setIsAddPost={setIsAddPost} isAddPost={isAddPost}   />
+        <AsideComponent sidebarOpen={sidebarOpen} setIsAddPost={setIsAddPost} isAddPost={isAddPost} />
        {isAddPost && (
         <>
-        <MainModalBorderPost setIsAddPost={setIsAddPost} />
+        <MainModalBorderPost setIsAddPost={setIsAddPost} addPost={addPost} setAddPost={setAddPost}  />
         </>
        )}
        
@@ -41,7 +42,7 @@ const Home = () => {
           <Route path="/search" element={<Search setSidebarOpen={setSidebarOpen}/>} />
           <Route path="/message" element={<Message setSidebarOpen={setSidebarOpen}/>} />
           <Route path="/post" element={<Post setSidebarOpen={setSidebarOpen}/>} />
-          <Route path="/profile" element={<Profile setSidebarOpen={setSidebarOpen}/>} />
+          <Route path="/profile" element={<Profile setSidebarOpen={setSidebarOpen} isAddPost={isAddPost}/>} />
           <Route path="/notification" element={<Notification setSidebarOpen={setSidebarOpen}/>} />
           <Route path="/settings/*" element={<Settings setSidebarOpen={setSidebarOpen}/>} />
           

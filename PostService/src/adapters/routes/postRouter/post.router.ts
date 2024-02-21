@@ -6,12 +6,25 @@ const verifyToken=require ('metamedia_auth')
 export default (dependencies:any)=> {
 
     const router = express()
-    const {sayHelloController,addPost_controller,searchLocation_controller,getLatAndLog_controller,getAllpostOfUser_controller} = postController(dependencies)
+    const {
+        sayHelloController,
+        addPost_controller,
+        searchLocation_controller,
+        getLatAndLog_controller,
+        getAllpostOfUser_controller,
+        showAllPost_controller,
+        likePost_controller,
+        addComment_controller
+    } = postController(dependencies)
 
     router.get('/sayHello',verifyToken,sayHelloController)
     router.post('/addPost',upload.array('images',5),addPost_controller)
     router.post('/searchLocation',searchLocation_controller)
     router.post('/getLatandLog',getLatAndLog_controller)
     router.get("/getAllPost",getAllpostOfUser_controller)
+    router.get('/showAllPost',showAllPost_controller)
+    router.post('/likePost',likePost_controller)
+    router.post('/addComment',addComment_controller)
+    
     return router
 }

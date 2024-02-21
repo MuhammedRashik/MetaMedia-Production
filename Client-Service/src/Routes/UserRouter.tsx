@@ -17,6 +17,9 @@ import AddPostModal from "../components/HomeComponent/AddPostcomponent";
 import SizeSelectModal from "../components/HomeComponent/SizeSelectModal";
 import SelectPostModal from "../components/HomeComponent/SelectPostModal";
 import SinglePostModal from "../components/postComponent/SinglePostModal";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {isSinglePostModalOpen,isSinglePostModalClose} from '../utils/ReduxStore/Slice/singlePostSlice'
 // import TestCrop from "../components/HomeComponent/Modal/testCrop";
 
 
@@ -25,12 +28,28 @@ import SinglePostModal from "../components/postComponent/SinglePostModal";
 
 
 const UserRouter = () => {
+  const singlePost = useSelector((state: any) => state.persisted.singlePost.singlePost);
+const isSinglePostModal = useSelector((state: any) => state.persisted.singlePost.isSinglePostModal);
+
+  const [isSinglePostOpen,setIsSinglePostOpen]=useState(false)
+  const [singlePostData,setSinglePostData]=useState({})
+const dispach=useDispatch()
+
+  useEffect(() => {
+   if(isSinglePostModal==undefined){
+    dispach(isSinglePostModalClose())
+   }
+  }, [isSinglePostModal]);
   return (  
     <>
    
-    <SinglePostModal/>
+ {isSinglePostModal && (
+  <>
+     <SinglePostModal />
+  </>
+ )}
     <Routes>
-      <Route path="/*" element={<Home />} />
+      <Route path="/*" element={<Home   />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/verifyOtp" element={<VerifyOtp />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />

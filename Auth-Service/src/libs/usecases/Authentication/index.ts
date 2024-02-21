@@ -10,6 +10,7 @@ import { chooseInterest_Usecase } from "./chooseInterestUsecase";
 import {refreshTokenUsecase} from './refreshToken_Usecases'
 import {getAllUsers_usecasse} from './getAllUsersUseCase'
 import {getUsersByName_Usecase} from './getUsersByNameUsecase'
+import {getUsersById_Usecase} from './getUserByIdUsecase'
 export {
   createUser_Usecases,
   verifyOtp_Usecase,
@@ -22,5 +23,6 @@ export {
   chooseInterest_Usecase,
   refreshTokenUsecase,
   getAllUsers_usecasse,
-  getUsersByName_Usecase
+  getUsersByName_Usecase,
+  getUsersById_Usecase
 };
