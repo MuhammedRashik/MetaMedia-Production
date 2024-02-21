@@ -4,11 +4,15 @@ import {getAllPostOfUser} from './getAllPostOfUser.Repo'
 import {showAllPostRepo} from './ShowAllPost.repo'
 import {addLikerepo} from './addLikeRepo'
 import { addComment } from './addCommentRepo'
+import {addReplayToCommentRepo} from './addReplayToCommentRepo'
+import {deleteCommentRepo} from './deleteCommentRepo'
 export {
     sayHelloRepo,
     createPostRepo,
     getAllPostOfUser,
     showAllPostRepo,
     addLikerepo,
-    addComment
+    addComment,
+    addReplayToCommentRepo,
+    deleteCommentRepo
 }

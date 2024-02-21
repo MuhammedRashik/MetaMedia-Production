@@ -8,7 +8,8 @@ const CommentSchema:Schema = new mongoose.Schema({
     content: String,
     replay:[{
         userId:mongoose.Schema.Types.ObjectId,
-        content:String
+        content:String,
+        createdAt:Date
     }],
     createdAt: {
         type: Date,

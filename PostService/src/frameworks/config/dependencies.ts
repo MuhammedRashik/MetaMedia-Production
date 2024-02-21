@@ -4,7 +4,9 @@ import {
     getAllPostOfUser,
     showAllPostRepo,
     addLikerepo,
-    addComment
+    addComment,
+    addReplayToCommentRepo,
+    deleteCommentRepo
 } from '../../adapters/repositories'
 
 import {
@@ -15,7 +17,11 @@ import {
     getAllPostOfUser_useCase,
     showAllPost_useCase,
     likePost_UseCase,
-    addComment_UseCase
+    addComment_UseCase,
+    addReplayToComment_UseCase,
+    deleteComment_UseCase
+
+
 } from '../../applications/useCases'
 
 
@@ -28,7 +34,9 @@ const useCase:any={
     getAllPostOfUser_useCase,
     showAllPost_useCase,
     likePost_UseCase,
-    addComment_UseCase
+    addComment_UseCase,
+    addReplayToComment_UseCase,
+    deleteComment_UseCase
 }
 const repositery:any={
     sayHelloRepo,
@@ -36,7 +44,10 @@ const repositery:any={
     getAllPostOfUser,
     showAllPostRepo,
     addLikerepo,
-    addComment
+    addComment,
+    addReplayToCommentRepo,
+    deleteCommentRepo
+
 
 }
 

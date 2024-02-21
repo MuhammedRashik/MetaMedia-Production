@@ -6,7 +6,9 @@ import {
     getAllPostOfUser_useCase,
     showAllPost_useCase,
     likePost_UseCase,
-    addComment_UseCase
+    addComment_UseCase,
+    addReplayToComment_UseCase,
+    deleteComment_UseCase
 } from './postUsecases'
 export {
     sayHello_usecase,
@@ -16,7 +18,9 @@ export {
     getAllPostOfUser_useCase,
     showAllPost_useCase,
     likePost_UseCase,
-    addComment_UseCase
+    addComment_UseCase,
+    addReplayToComment_UseCase,
+    deleteComment_UseCase
 
 
 }
