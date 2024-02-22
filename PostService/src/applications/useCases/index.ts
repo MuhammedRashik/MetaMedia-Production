@@ -8,7 +8,8 @@ import {
     likePost_UseCase,
     addComment_UseCase,
     addReplayToComment_UseCase,
-    deleteComment_UseCase
+    deleteComment_UseCase,
+    reportPost_UseCase
 } from './postUsecases'
 export {
     sayHello_usecase,
@@ -20,7 +21,8 @@ export {
     likePost_UseCase,
     addComment_UseCase,
     addReplayToComment_UseCase,
-    deleteComment_UseCase
+    deleteComment_UseCase,
+    reportPost_UseCase
 
 
 }

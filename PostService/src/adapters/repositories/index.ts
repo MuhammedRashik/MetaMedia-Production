@@ -6,6 +6,7 @@ import {addLikerepo} from './addLikeRepo'
 import { addComment } from './addCommentRepo'
 import {addReplayToCommentRepo} from './addReplayToCommentRepo'
 import {deleteCommentRepo} from './deleteCommentRepo'
+import{reportPostRepo} from './reportPostRepo'
 export {
     sayHelloRepo,
     createPostRepo,
@@ -14,5 +15,6 @@ export {
     addLikerepo,
     addComment,
     addReplayToCommentRepo,
-    deleteCommentRepo
+    deleteCommentRepo,
+    reportPostRepo
 }

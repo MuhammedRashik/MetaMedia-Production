@@ -38,7 +38,8 @@ const PostSchema=new mongoose.Schema({
     },
     reports:[{
         userId:mongoose.Schema.Types.ObjectId,
-        content:String
+        content:String,
+        
     }],
     postCropSize:String,
     postType:{

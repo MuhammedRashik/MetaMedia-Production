@@ -3,7 +3,7 @@ import express from 'express'
 import {postController} from '../../controllers'
 import { upload } from '../../multer/multerSetUp'
 const verifyToken=require ('metamedia_auth')
-import {validateComment,validateDeleteComment} from '../../validation'
+import {validateComment,validateDeleteComment,validateReportPost} from '../../validation'
 export default (dependencies:any)=> {
 
     const router = express()
@@ -17,7 +17,8 @@ export default (dependencies:any)=> {
         likePost_controller,
         addComment_controller,
         addReplayToComment_controller,
-        deleteComment_controller
+        deleteComment_controller,
+        reportPost_controller
     } = postController(dependencies)
 
     router.get('/sayHello',verifyToken,sayHelloController)
@@ -30,6 +31,8 @@ export default (dependencies:any)=> {
     router.post('/addComment',addComment_controller)
     router.post('/addReplayToComment',validateComment,addReplayToComment_controller)
     router.post('/deleteComment',validateDeleteComment,deleteComment_controller)
+    router.post('/reportPost',validateReportPost,reportPost_controller)
+    //replay delete
     
     return router
 }

@@ -6,7 +6,8 @@ import {
     addLikerepo,
     addComment,
     addReplayToCommentRepo,
-    deleteCommentRepo
+    deleteCommentRepo,
+    reportPostRepo
 } from '../../adapters/repositories'
 
 import {
@@ -19,7 +20,8 @@ import {
     likePost_UseCase,
     addComment_UseCase,
     addReplayToComment_UseCase,
-    deleteComment_UseCase
+    deleteComment_UseCase,
+    reportPost_UseCase
 
 
 } from '../../applications/useCases'
@@ -36,7 +38,8 @@ const useCase:any={
     likePost_UseCase,
     addComment_UseCase,
     addReplayToComment_UseCase,
-    deleteComment_UseCase
+    deleteComment_UseCase,
+    reportPost_UseCase
 }
 const repositery:any={
     sayHelloRepo,
@@ -46,7 +49,8 @@ const repositery:any={
     addLikerepo,
     addComment,
     addReplayToCommentRepo,
-    deleteCommentRepo
+    deleteCommentRepo,
+    reportPostRepo
 
 
 }

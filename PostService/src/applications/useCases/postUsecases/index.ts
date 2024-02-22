@@ -8,6 +8,7 @@ import {likePost_UseCase} from './likePost_UseCase'
 import {addComment_UseCase} from './AddComment_UseCase'
 import {addReplayToComment_UseCase} from './addReplayToComment_UseCase'
 import {deleteComment_UseCase} from './deleteComment_UseCase'
+import {reportPost_UseCase} from './reportPost_UseCase'
 export {
     sayHello_usecase,
     addPostUseCase,
@@ -18,5 +19,6 @@ export {
     addComment_UseCase,
     likePost_UseCase,
     addReplayToComment_UseCase,
-    deleteComment_UseCase
+    deleteComment_UseCase,
+    reportPost_UseCase
 }
