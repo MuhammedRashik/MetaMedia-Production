@@ -9,6 +9,7 @@ import addComment_controller from "./addComment_controller";
 import addReplayToComment_controller from "./addReplayToComment_controller";
 import deleteComment_controller from "./deleteComment_controller";
 import reportPost_controller from "./reportPost_controller";
+import deletePost_controller from "./deletePost_controller";
 export default (dependencies:any)=>{
  return {
 
@@ -22,7 +23,8 @@ export default (dependencies:any)=>{
      addComment_controller:addComment_controller(dependencies),
      addReplayToComment_controller:addReplayToComment_controller(dependencies),
      deleteComment_controller:deleteComment_controller(dependencies),
-     reportPost_controller:reportPost_controller(dependencies)
+     reportPost_controller:reportPost_controller(dependencies),
+     deletePost_controller:deletePost_controller(dependencies)
 
  }
 

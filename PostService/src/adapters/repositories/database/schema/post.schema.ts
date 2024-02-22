@@ -39,7 +39,7 @@ const PostSchema=new mongoose.Schema({
     reports:[{
         userId:mongoose.Schema.Types.ObjectId,
         content:String,
-        
+
     }],
     postCropSize:String,
     postType:{
@@ -51,6 +51,10 @@ const PostSchema=new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now()
+    },
+    isDelete:{
+        type:Boolean,
+        default:false
     }
 
 
